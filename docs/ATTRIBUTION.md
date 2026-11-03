@@ -1,6 +1,6 @@
 # Credits and usage notes
 
-- **Character:** 大肥鱼 / DeepSeek-chan, a character shared within the Chinese internet community.
+- **Character:** Deepseek chan, a character shared within the Chinese internet community.
 - **Visual reference:** supplied by the project owner. The original artist has not been verified; this project does not claim authorship of the underlying character design.
 - **Adaptation:** AI-assisted rendering and animation, directed and reviewed by the project owner using OpenAI image generation and Codex.
 - **Identity:** muted slate/periwinkle hair with dusty cornflower tips, blue eyes, a navy and ivory maid outfit with gold trim, whale apron, fin ornaments, and whale tail.

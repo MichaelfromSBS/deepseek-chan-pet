@@ -1,2 +1,2 @@
 a8a714f4e1fc7aa049a5fae37fa5d6ea2a47f130edf8953c77e8177c337bcb44  pet/deepseek-chan/spritesheet.webp
-80f3396538b0967b71c12395b5e838fefaecb62f65dcbd52ba5b93beec91cfb8  releases/deepseek-chan-v1.0.0.zip
+4467e8ecd996ae9fd3395378a4f811b967661d3d7af4678a99835acd952b1833  releases/deepseek-chan-v1.0.0.zip

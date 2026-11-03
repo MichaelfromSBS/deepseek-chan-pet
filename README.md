@@ -1,8 +1,8 @@
-# 大肥鱼 · DeepSeek-chan
+# Deepseek chan
 
-A blue-haired whale maid companion for Codex, inspired by the Chinese community character 大肥鱼 (DeepSeek-chan).
+A blue-haired whale maid companion for Codex, inspired by the Chinese community character Deepseek chan.
 
-![DeepSeek-chan waving](preview/animations/waving.gif)
+![Deepseek chan waving](preview/animations/waving.gif)
 ![A gentle little hop](preview/animations/jumping.gif)
 ![Rice break](preview/animations/failed.gif)
 
@@ -12,7 +12,7 @@ She waves with a small body sway, takes a gentle low hop, enjoys rice during set
 
 1. Download [deepseek-chan-v1.0.0.zip](releases/deepseek-chan-v1.0.0.zip).
 2. Extract its `deepseek-chan` folder into your Codex home’s `pets` directory (on Windows, `%USERPROFILE%\.codex\pets\`). The result should be `pets/deepseek-chan/pet.json` alongside `spritesheet.webp`.
-3. Open **Settings → Pets**, refresh the list, and select **大肥鱼 · DeepSeek-chan**. Use `/pet` to show the companion.
+3. Open **Settings → Pets**, refresh the list, and select **Deepseek chan**. Use `/pet` to show the companion.
 
 Back up an existing `deepseek-chan` folder before replacing it.
 
