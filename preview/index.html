@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大肥鱼 · Animation preview</title>
+<style>
+  :root{font-family:system-ui,sans-serif;color:#28314f;background:#f5f6fa;--surface:#fff;--border:#dce1ee;--scale:1}
+  *{box-sizing:border-box}body{max-width:1100px;margin:36px auto;padding:0 24px}h1{font-size:26px;margin:0 0 8px}p{color:#66718e;margin:0 0 24px;line-height:1.5}
+  .controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:20px 0}button{font:inherit;padding:8px 14px;border:1px solid var(--border);border-radius:9px;color:inherit;background:var(--surface);cursor:pointer}label{display:flex;align-items:center;gap:10px}input{accent-color:#576eb4}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.card{padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--surface);text-align:center;overflow:auto}.stage{min-height:230px;display:grid;place-items:center}.card h2{font-size:15px;font-weight:600;margin:8px 0 0}canvas{width:calc(192px * var(--scale));height:calc(208px * var(--scale));display:block}
+  body.dark{background:#181d2d;color:#e2e7fa;--surface:#242c41;--border:#3a4660}body.dark p{color:#a7b3d1}#status{font-size:13px}footer{margin:24px 0;font-size:13px;color:#66718e}
+</style>
+<body>
+<h1>大肥鱼 · DeepSeek-chan</h1>
+<p>Preview the nine animations at desktop size. Her resting pose is also the still image used with reduced motion.</p>
+<div class="controls">
+  <button id="play" type="button">Pause</button>
+  <button id="theme" type="button">Dark background</button>
+  <label>Size <input id="size" type="range" min="1" max="2" step="0.25" value="1"><output id="sizeValue">1×</output></label>
+</div>
+<p id="status" role="status">Loading animations…</p>
+<main id="grid" class="grid"></main>
+<footer>Installed pet selection: Settings → Pets → Refresh → 大肥鱼 · DeepSeek-chan.</footer>
+<script>
+const rows=[
+  {name:'Resting',row:0,d:[280,110,110,140,140,320]},
+  {name:'Move right',row:1,d:[120,120,120,120,120,120,120,220]},
+  {name:'Move left',row:2,d:[120,120,120,120,120,120,120,220]},
+  {name:'Wave',row:3,d:[140,140,140,280]},
+  {name:'Jump',row:4,d:[140,140,140,140,280]},
+  {name:'Setback · rice break',row:5,d:[140,140,140,140,140,140,140,240]},
+  {name:'Waiting for input',row:6,d:[150,150,150,150,150,260]},
+  {name:'Laptop work',row:7,d:[120,120,120,120,120,220]},
+  {name:'Reviewing',row:8,d:[150,150,150,150,150,280]}
+];
+const grid=document.getElementById('grid');
+for(const state of rows){
+  const card=document.createElement('section');card.className='card';
+  const stage=document.createElement('div');stage.className='stage';
+  const canvas=document.createElement('canvas');canvas.width=192;canvas.height=208;canvas.setAttribute('aria-label',state.name+' animation');
+  const title=document.createElement('h2');title.textContent=state.name;
+  stage.append(canvas);card.append(stage,title);grid.append(card);state.ctx=canvas.getContext('2d');state.total=state.d.reduce((a,b)=>a+b,0);
+}
+let playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,last;
+const play=document.getElementById('play');play.textContent=playing?'Pause':'Play';
+play.onclick=()=>{playing=!playing;play.textContent=playing?'Pause':'Play'};
+document.getElementById('theme').onclick=e=>{document.body.classList.toggle('dark');e.target.textContent=document.body.classList.contains('dark')?'Light background':'Dark background'};
+document.getElementById('size').oninput=e=>{document.documentElement.style.setProperty('--scale',e.target.value);document.getElementById('sizeValue').value=e.target.value+'×'};
+const atlas=new Image();
+atlas.onload=()=>{
+  document.getElementById('status').textContent='All nine animations loaded.';
+  function tick(now){
+    if(last!==undefined&&playing)elapsed+=Math.min(now-last,100);last=now;
+    for(const state of rows){
+      let t=elapsed%state.total,index=0;
+      while(index<state.d.length-1&&t>=state.d[index]){t-=state.d[index];index++}
+      state.ctx.clearRect(0,0,192,208);state.ctx.drawImage(atlas,index*192,state.row*208,192,208,0,0,192,208);
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+};
+atlas.onerror=()=>{document.getElementById('status').textContent='The animation sheet is not available yet. Reopen this preview after the pet build is complete.'};
+atlas.src='../pet/deepseek-chan/spritesheet.webp';
+</script>
+</body>
+</html>
+
+
